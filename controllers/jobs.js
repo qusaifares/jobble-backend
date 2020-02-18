@@ -1,4 +1,3 @@
-const axios = require('axios');
 const express = require('express');
 const Job = require('../db/models/Job');
 const router = express.Router();
@@ -19,7 +18,7 @@ router.get('/refresh', (req, res) => {
   fetch(jobsURL)
     .then(data => data.json())
     .then(jobs => {
-      console.log(jobs);
+      // console.log('returned ' + jobs.length + ' records');
       res.json(jobs);
     })
     .catch(console.error);
@@ -32,14 +31,14 @@ router.get('/refresh', (req, res) => {
 // QUESTION: IS THIS THE RIGHT PLACE TO DO THAT DATA TRANSFORMATION?
 // NOTE: We only want to load non-duplicate jobs into Mongo
 router.get('/refresh', (req, res) => {
+  axios
+    .get(jobsURL)
 
-  axios.get(jobsURL)
-  
-    .then((jobs) => {
+    .then(jobs => {
       // Ensure we do not populate duplicate records into the jobs collection.
       // The filter will be
       // const filter = { id: res[item].id }
-      console.log(jobs)
+      console.log(jobs);
       console.log(
         'For each record, we need to upsert here, https://mongoosejs.com/docs/tutorials/findoneandupdate.html#upsert'
       );
