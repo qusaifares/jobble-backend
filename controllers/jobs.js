@@ -14,13 +14,13 @@ const jobsURL =
   'https://jobs.github.com/positions.json?description=react&page=1';
 
 // When they do a GET '/', it just returns all jobs from Mongo
-router
-  .get('/', (req, res) => {
-    Job.find({}).then(jobs => {
+router.get('/', (req, res) => {
+  Job.find({})
+    .then(jobs => {
       res.json(jobs);
-    });
-  })
-  .catch(console.error);
+    })
+    .catch(console.error);
+});
 
 // The '/refresh' route will actually call the Gihub Jobs API and load results into Mongo
 // It is stubbed out for now.
