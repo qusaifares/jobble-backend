@@ -6,7 +6,8 @@ router.get('/', (req, res) => {
   User.find({}).then(data => res.json(data.map(user => user.id)));
 });
 
-router.get('/login/:username', (req, res) => {
+// Changed route from /login/:username
+router.get('/:username', (req, res) => {
   User.findOne({ username: req.params.username }).then(data => res.json(data));
 });
 

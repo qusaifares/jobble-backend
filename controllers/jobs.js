@@ -14,15 +14,13 @@ const jobsURL =
   'https://jobs.github.com/positions.json?description=react&page=1';
 
 // When they do a GET '/', it just returns all jobs from Mongo
-router.get('/refresh', (req, res) => {
-  fetch(jobsURL)
-    .then(data => data.json())
-    .then(jobs => {
-      // console.log('returned ' + jobs.length + ' records');
+router
+  .get('/', (req, res) => {
+    Job.find({}).then(jobs => {
       res.json(jobs);
-    })
-    .catch(console.error);
-});
+    });
+  })
+  .catch(console.error);
 
 // The '/refresh' route will actually call the Gihub Jobs API and load results into Mongo
 // It is stubbed out for now.
@@ -31,17 +29,11 @@ router.get('/refresh', (req, res) => {
 // QUESTION: IS THIS THE RIGHT PLACE TO DO THAT DATA TRANSFORMATION?
 // NOTE: We only want to load non-duplicate jobs into Mongo
 router.get('/refresh', (req, res) => {
-  axios
-    .get(jobsURL)
-
+  fetch(jobsURL)
+    .then(data => data.json())
     .then(jobs => {
-      // Ensure we do not populate duplicate records into the jobs collection.
-      // The filter will be
-      // const filter = { id: res[item].id }
-      console.log(jobs);
-      console.log(
-        'For each record, we need to upsert here, https://mongoosejs.com/docs/tutorials/findoneandupdate.html#upsert'
-      );
+      Job.insertMany(jobs);
+      console.log('inserted', jobs.length, 'jobs');
     })
     .catch(console.error);
 });
