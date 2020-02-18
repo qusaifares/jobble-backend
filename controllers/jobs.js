@@ -1,6 +1,8 @@
+const axios = require('axios');
 const express = require('express');
 const Job = require('../db/models/Job');
 const router = express.Router();
+const fetch = require('node-fetch');
 
 // We are using the Github Jobs API:
 // https://jobs.github.com/api
@@ -13,9 +15,11 @@ const jobsURL =
   'https://jobs.github.com/positions.json?description=react&page=1';
 
 // When they do a GET '/', it just returns all jobs from Mongo
-router.get('/', (req, res) => {
-  Job.find({})
+router.get('/refresh', (req, res) => {
+  fetch(jobsURL)
+    .then(data => data.json())
     .then(jobs => {
+      console.log(jobs);
       res.json(jobs);
     })
     .catch(console.error);
@@ -28,15 +32,14 @@ router.get('/', (req, res) => {
 // QUESTION: IS THIS THE RIGHT PLACE TO DO THAT DATA TRANSFORMATION?
 // NOTE: We only want to load non-duplicate jobs into Mongo
 router.get('/refresh', (req, res) => {
-  res
-    .redirect(jobsURL)
-    .then(jobs => {
-      res.json(jobs);
-    })
-    .then(() => {
+
+  axios.get(jobsURL)
+  
+    .then((jobs) => {
       // Ensure we do not populate duplicate records into the jobs collection.
       // The filter will be
       // const filter = { id: res[item].id }
+      console.log(jobs)
       console.log(
         'For each record, we need to upsert here, https://mongoosejs.com/docs/tutorials/findoneandupdate.html#upsert'
       );
