@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const methodOverride = require('method-override');
 
 const jobsController = require('./controllers/jobs');
 const usersController = require('./controllers/users');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
 app.use(cors());
 
 app.use('/jobs', jobsController);
