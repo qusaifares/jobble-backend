@@ -6,9 +6,9 @@ router.get('/', (req, res) => {
   User.find({}).then(data => res.json(data.map(user => user.id)));
 });
 
-// Changed route from /login/:username
-router.get('/:username', (req, res) => {
-  User.findOne({ username: req.params.username }).then(data => res.json(data));
+// Changed route from /login/:userId
+router.get('/:userId', (req, res) => {
+  User.findOne({ _id: req.params.userId }).then(data => res.json(data));
 });
 
 router.post('/create', (req, res) => {
