@@ -9,13 +9,11 @@ User.deleteMany({})
     return User.collection.insertMany(users);
   })
   .then(() => {
-    process.exit();
-  });
-
-Job.deleteMany({})
-  .then(() => {
-    return Job.collection.insertMany(jobs);
-  })
-  .then(() => {
-    process.exit();
+    Job.deleteMany({})
+      .then(() => {
+        return Job.collection.insertMany(jobs);
+      })
+      .then(() => {
+        process.exit();
+      });
   });
