@@ -22,12 +22,21 @@ router.get('/', (req, res) => {
     .catch(console.error);
 });
 
+router.get('/:id', (req, res) => {
+  Job.findById(req.params.id)
+    .then(jobs => {
+      res.json(jobs);
+    })
+    .catch(console.error);
+});
+
 // The '/refresh' route will actually call the Gihub Jobs API and load results into Mongo
 // It is stubbed out for now.
 // Note that when we import the data into Mongo, we need to replace the Mongo-assigned _id with
 // the ID assigned by Github Jobs
 // QUESTION: IS THIS THE RIGHT PLACE TO DO THAT DATA TRANSFORMATION?
 // NOTE: We only want to load non-duplicate jobs into Mongo
+
 router.get('/refresh', (req, res) => {
   fetch(jobsURL)
     .then(data => data.json())

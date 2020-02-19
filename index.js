@@ -1,16 +1,21 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
 const jobsController = require('./controllers/jobs');
 const usersController = require('./controllers/users');
 
-app.use('/api/jobs', jobsController);
-app.use('/api/users', usersController);
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/jobs', jobsController);
+app.use('/users', usersController);
 
 app.set('port', process.env.PORT || 8080);
 
