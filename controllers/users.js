@@ -23,7 +23,7 @@ router.post('/create', (req, res) => {
 // When calling the /save/:jobID route, provide the username in the request body
 // Then, for that user record,
 // - Add the jobID to savedJobs
-router.post('/save/:jobID', (req, res) => {
+router.put('/save/:jobID', (req, res) => {
   const filter = { username: req.body.username };
   const update = { $push: { savedJobs: jobID } };
   User.findOneAndUpdate(filter, update, { new: true });

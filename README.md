@@ -12,22 +12,42 @@ Deployed with Atlas and Heroku.
 
 https://customercrmma.herokuapp.com/customers
 
-### 1. `GET /users`
+### Users
+
+#### 1. `GET /users`
 
 - Returns all user id's
 
-### 2. `GET /users/login/:username`
+#### 2. `GET /users/:username`
 
-- Returns data for an individual user selected by their ID
+- Returns data for an individual user selected by their username
 
-### 3. `POST /users/create`
+#### 3. `POST /users/create`
 
 - Creates a new user
 
-### 4. `PUT /customers/:id/edit`
+#### 4. `PUT /users/save/:jobID`
 
-- Allows to select one customer by id and edit data
+- Adds a job to the `savedJobs` array in the user object
 
-### 5. `DELETE /customers/:id`
+#### 5. `PUT /users/discard/:jobID`
 
-- Delete one customer by id
+- Adds a job ID to the `discardedJobs` array in the user object
+
+### Jobs
+
+#### 1. `GET /jobs`
+
+- Returns all jobs in mongo database
+
+#### 2. `GET /jobs/:id`
+
+- Returns a job by its ID
+
+#### 3. `GET /jobs/refresh`
+
+- Fetches jobs from the GitHub Jobs API and stores it in Mongo
+
+#### 4. `GET /jobs/search`
+
+- Returns array of jobs by search criteria
