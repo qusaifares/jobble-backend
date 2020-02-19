@@ -8,13 +8,11 @@ if (process.env.NODE_ENV === 'production') {
   mongoURI = 'mongodb://localhost/jobble';
 }
 
-mongoose.connect(
-  encodeURI(mongoURI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-  })
-);
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false
+});
 
 module.exports = mongoose;
