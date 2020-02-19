@@ -1,6 +1,6 @@
 # Jobble
 
-A job finding app built with the MERN stack.
+Job posting management app for job seekers built with MERN stack.
 
 Front End: https://github.com/javascriptures/jobble-frontend
 
@@ -10,7 +10,7 @@ Automated testing with 5/5 passed.
 
 Deployed with Atlas and Heroku.
 
-https://customercrmma.herokuapp.com/customers
+http://jobble-backend.herokuapp.com/
 
 ### Users
 
