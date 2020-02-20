@@ -1,7 +1,7 @@
 const mongoose = require('./connection');
 const User = require('./models/User');
 const Job = require('./models/Job');
-const users = require('./users.json');
+const users = require('./users-localhost.json');
 const jobs = require('./jobs.json');
 
 User.deleteMany({})
