@@ -1,38 +1,35 @@
-# Jobble
-
-Job posting management app for job seekers built with MERN stack.
+# Jobble Back End
 
 Front End: https://github.com/javascriptures/jobble-frontend
+Heroku: http://jobble-backend.herokuapp.com/
 
-## API
-
-Automated testing with 5/5 passed.
-
-Deployed with Atlas and Heroku.
-
-http://jobble-backend.herokuapp.com/
+## Jobble API
 
 ### Users
 
 #### 1. `GET /users`
 
-- Returns all user id's
+- Return all user id's
 
-#### 2. `GET /users/:username`
+#### 2. `GET /users/:userID`
 
-- Returns data for an individual user selected by their username
+- Return document of the individual user whose MongoID is :userID
 
-#### 3. `POST /users/create`
+#### 3. `POST /users/create/:username`
 
-- Creates a new user
+- Create a new user with username :username
 
-#### 4. `PUT /users/save/:jobID`
+#### 4. `POST /users/delete/:userID`
 
-- Adds a job to the `savedJobs` array in the user object
+- Delete the user whose Mongo ObjectID is :userID
 
-#### 5. `PUT /users/discard/:jobID`
+#### 5. `PUT /users/:userID/save/:jobID`
 
-- Adds a job ID to the `discardedJobs` array in the user object
+- Add a job ID to the `savedJobs` array in the user's document
+
+#### 6. `PUT /users/:userID/discard/:jobID`
+
+- Add a job ID to the `discardedJobs` array in the user's document
 
 ### Jobs
 
@@ -50,4 +47,4 @@ http://jobble-backend.herokuapp.com/
 
 #### 4. `GET /jobs/search`
 
-- Returns array of jobs by search criteria
+- Returns array of jobs by search criteria (Currently just a placeholder which returns all jobs)

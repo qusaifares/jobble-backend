@@ -22,18 +22,30 @@ router.post('/create/:username', (req, res) => {
     .catch(console.error);
 });
 
+router.post('/delete/:username', (req, res) => {
+  User.findOneAndRemove({ username: req.params.username })
+    .then(user => res.json(user))
+    .catch(console.error);
+});
+
 router.put('/:userID/save/:jobID', (req, res) => {
   const filter = { _id: req.params.userID };
   const update = { $push: { savedJobs: req.params.jobID } };
-  User.findOneAndUpdate(filter, update).then(user => res.json(user));
+  const options = { new: true };
+  User.findOneAndUpdate(filter, update, options)
+    .then(user => res.json(user))
+    .catch(console.error);
   // Now I need to remove the jobID from unsavedJobs:
 });
 
-// - Add the jobID to discardedJobs
-router.post('/:userID/discard/:jobID', (req, res) => {
+router.put('/:userID/discard/:jobID', (req, res) => {
   const filter = { _id: req.params.userID };
-  const update = { $push: { discardedJobs: jobID } };
-  User.findOneAndUpdate(filter, update, { new: true });
+  const update = { $push: { discardedJobs: req.params.jobID } };
+  const options = { new: true };
+  User.findOneAndUpdate(filter, update, options)
+    .then(user => res.json(user))
+    .catch(console.error);
+  // Now I need to remove the jobID from unsavedJobs:
 });
 
 module.exports = router;
