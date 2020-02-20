@@ -19,9 +19,10 @@ Heroku: http://jobble-backend.herokuapp.com/
 
 - Return document of the individual user whose MongoID is :userID
 
-#### 5. `POST /users/create/:username`
+#### 4. `POST /users/create`
 
 - Create a new user with username :username
+- Body should contain username in JSON format
 
 #### 5. `POST /users/delete/:userID`
 
