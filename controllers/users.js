@@ -21,13 +21,8 @@ router.get('/:userId', (req, res) => {
   User.findOne({ _id: req.params.userId }).then(data => res.json(data));
 });
 
-router.post('/create/:username', (req, res) => {
-  User.create({
-    username: req.params.username,
-    unSavedJobs: [],
-    savedJobs: [],
-    discardedJobs: []
-  })
+router.post('/create', (req, res) => {
+  User.create({ username: req.body.username })
     .then(user => res.json(user))
     .catch(console.error);
 });
