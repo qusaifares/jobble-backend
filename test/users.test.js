@@ -35,7 +35,7 @@ describe('GET /users', () => {
 });
 
 describe('GET /users/:id', () => {
-  const id = '5e4d82beaa14280004088aff';
+  const id = '5e4dcde4c3e20e0004325bd4';
 
   it('should return a 200 response', done => {
     api
@@ -54,12 +54,38 @@ describe('GET /users/:id', () => {
     done();
   });
 
-  it('should have id, username properties', done => {
+  it('should have _id, username, unsavedJobs, savedJobs, discardedJobs properties', done => {
     api
       .get(`/users/${id}`)
       .set('Accept', 'application/json')
       .end((err, res) => {
+        expect(res.body).to.have.property('_id');
         expect(res.body).to.have.property('username');
+        expect(res.body).to.have.property('unsavedJobs');
+        expect(res.body).to.have.property('savedJobs');
+        expect(res.body).to.have.property('discardedJobs');
+      });
+    done();
+  });
+});
+
+describe('POST /users/create/:username', () => {
+  const username = 'jerrica';
+
+  before(done => {
+    api
+      .post(`/users/create/${username}`)
+      .set('Accept', 'application/json')
+      .end(done);
+  });
+
+  it('should add a user', done => {
+    api
+      .get('/users')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        const userToFind = res.body.find(user => user === username);
+        expect(userToFind).to.be.an('object');
       });
     done();
   });
