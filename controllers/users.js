@@ -4,7 +4,17 @@ const router = express.Router();
 
 // Return only the _id field for all users
 router.get('/', (req, res) => {
-  User.find({}).then(data => res.json(data.map(user => user.id)));
+  User.find({}).then(data => res.json(data.map(user => user._id)));
+});
+
+router.get('/all', (req, res) => {
+  User.find({}).then(data =>
+    res.json(
+      data.map(user => {
+        return { _id: user._id, username: user.username };
+      })
+    )
+  );
 });
 
 router.get('/:userId', (req, res) => {
