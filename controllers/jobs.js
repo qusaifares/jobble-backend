@@ -39,11 +39,11 @@ router.get('/:id', (req, res) => {
 
 router.get('/refresh', (req, res) => {
   fetch(jobsURL)
-    .then(data => data.json())
-    .then(jobs => {
-      Job.insertMany(jobs);
-      console.log('inserted', jobs.length, 'jobs');
-    })
+    .then(jobs => jobs.json())
+    // .then(jobs => {
+    //   Job.insertMany(jobs);
+    //   console.log('inserted', jobs.length, 'jobs');
+    // })
     .catch(console.error);
 });
 

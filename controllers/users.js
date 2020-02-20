@@ -11,13 +11,16 @@ router.get('/:userId', (req, res) => {
   User.findOne({ _id: req.params.userId }).then(data => res.json(data));
 });
 
-router.post('/create', (req, res) => {
+router.post('/create/:username', (req, res) => {
   console.log('THE BODY IS', req.body);
   User.create({
-    username: req.body.username,
+    username: req.params.username,
+    unSavedJobs: [],
     savedJobs: [],
     discardedJobs: []
-  }).then(user => res.json(user));
+  })
+    .then(user => res.json(user))
+    .catch(console.error);
 });
 
 // When calling the /save/:jobID route, provide the username in the request body
