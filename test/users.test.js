@@ -34,6 +34,37 @@ describe('GET /users', () => {
   });
 });
 
+describe('GET /users/all', () => {
+  it('should return a 200 response', done => {
+    api
+      .get('/users')
+      .set('Accept', 'application/json')
+      .expect(200, done);
+  });
+
+  it('should return an array', done => {
+    api
+      .get('/users/all')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        expect(res.body).to.be.an('array');
+      });
+    done();
+  });
+
+  it('should return an array of objects ', done => {
+    api
+      .get('/users/all')
+      .set('Accept', 'application/json')
+      .end((err, res) => {
+        res.body.forEach(user => {
+          expect(user).to.be.a('object');
+        });
+        done();
+      });
+  });
+});
+
 describe('GET /users/:id', () => {
   const id = '5e4dcde4c3e20e0004325bd4';
 
@@ -70,21 +101,23 @@ describe('GET /users/:id', () => {
 });
 
 describe('POST /users/create/:username', () => {
-  const username = 'jerrica';
+  const username = 'jamie';
 
   before(done => {
     api
       .post(`/users/create/${username}`)
       .set('Accept', 'application/json')
-      .end(done);
+      .end();
+    done();
   });
 
   it('should add a user', done => {
     api
-      .get('/users')
+      .get('/users/all')
       .set('Accept', 'application/json')
       .end((err, res) => {
-        const userToFind = res.body.find(user => user === username);
+        const userToFind = res.body.find(user => user.username == username);
+        console.log('the user is ' + res.body || 'no user');
         expect(userToFind).to.be.an('object');
       });
     done();
