@@ -69,12 +69,14 @@ describe('GET /users/:id', () => {
   });
 });
 
-describe('POST /users/create/:username', () => {
+describe('POST /users/create', () => {
   const username = 'jerrica';
 
   before(done => {
     api
-      .post(`/users/create/${username}`)
+      .post(`/users/create`)
+      .set('content-type', 'application/json')
+      .send({ username: 'jerrica' })
       .set('Accept', 'application/json')
       .end(done);
   });

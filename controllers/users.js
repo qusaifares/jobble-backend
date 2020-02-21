@@ -27,8 +27,8 @@ router.post('/create', (req, res) => {
     .catch(console.error);
 });
 
-router.post('/delete/:username', (req, res) => {
-  User.findOneAndRemove({ username: req.params.username })
+router.post('/delete/:userID', (req, res) => {
+  User.findOneAndRemove({ _id: req.params.userID })
     .then(user => res.json(user))
     .catch(console.error);
 });
