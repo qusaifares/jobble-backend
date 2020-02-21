@@ -25,6 +25,14 @@ router.get('/username/:username', (req, res) => {
   User.findOne({ username: req.params.username }).then(data => res.json(data));
 });
 
+router.get('/login/:username', (req, res) => {
+  User.findOne({ username: req.params.username }).then(data => res.json(data));
+});
+
+router.get('/login', (req, res) => {
+  User.findOne({ username: req.body.username }).then(data => res.json(data));
+});
+
 router.post('/create', (req, res) => {
   User.create({ username: req.body.username })
     .then(user => res.json(user))
