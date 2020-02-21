@@ -19,20 +19,24 @@ Heroku: http://jobble-backend.herokuapp.com/
 
 - Return document of the individual user whose MongoID is :userID
 
-#### 4. `POST /users/create`
+#### 4. `GET /users/username/:username`
+
+- Return document of the individual user whose username is :username
+
+#### 5. `POST /users/create`
 
 - Create a new user with username :username
 - Body should contain username in JSON format
 
-#### 5. `POST /users/delete/:userID`
+#### 6. `POST /users/delete/:userID`
 
 - Delete the user whose Mongo ObjectID is :userID
 
-#### 6. `PUT /users/:userID/save/:jobID`
+#### 7. `PUT /users/:userID/save/:jobID`
 
 - Add a job ID to the `savedJobs` array in the user's document
 
-#### 7. `PUT /users/:userID/discard/:jobID`
+#### 8. `PUT /users/:userID/discard/:jobID`
 
 - Add a job ID to the `discardedJobs` array in the user's document
 
