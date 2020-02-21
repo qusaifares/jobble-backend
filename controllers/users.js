@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/all', (req, res) => {
-  User.find({}).then(data => res.json(user));
+  User.find({}).then(data => res.json(data));
 });
 
 router.get('/:userId', (req, res) => {
