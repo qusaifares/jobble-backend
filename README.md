@@ -1,8 +1,10 @@
 # Jobble Back End
 
-Front End: https://github.com/javascriptures/jobble-frontend
+Front End Repo: https://github.com/javascriptures/jobble-frontend
 
-Heroku: http://jobble-backend.herokuapp.com/
+Front End Deployment: https://jobble-frontend.herokuapp.com/
+
+Back End Deployment: http://jobble-backend.herokuapp.com/
 
 ## Jobble API
 
