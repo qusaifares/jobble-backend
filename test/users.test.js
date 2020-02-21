@@ -100,12 +100,19 @@ describe('GET /users/:id', () => {
   });
 });
 
+<<<<<<< HEAD
 describe('POST /users/create/:username', () => {
   const username = 'jamie';
+=======
+describe('POST /users/create', () => {
+  const username = 'jerrica';
+>>>>>>> 6f2123173f62f4c2fe32653a60f06d0fc701736c
 
   before(done => {
     api
-      .post(`/users/create/${username}`)
+      .post(`/users/create`)
+      .set('content-type', 'application/json')
+      .send({ username: 'jerrica' })
       .set('Accept', 'application/json')
       .end();
     done();

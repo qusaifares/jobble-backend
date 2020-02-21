@@ -21,19 +21,18 @@ router.get('/:userId', (req, res) => {
   User.findOne({ _id: req.params.userId }).then(data => res.json(data));
 });
 
-router.post('/create/:username', (req, res) => {
-  User.create({
-    username: req.params.username,
-    unSavedJobs: [],
-    savedJobs: [],
-    discardedJobs: []
-  })
+router.get('/username/:username', (req, res) => {
+  User.findOne({ username: req.params.username }).then(data => res.json(data));
+});
+
+router.post('/create', (req, res) => {
+  User.create({ username: req.body.username })
     .then(user => res.json(user))
     .catch(console.error);
 });
 
-router.post('/delete/:username', (req, res) => {
-  User.findOneAndRemove({ username: req.params.username })
+router.post('/delete/:userID', (req, res) => {
+  User.findOneAndRemove({ _id: req.params.userID })
     .then(user => res.json(user))
     .catch(console.error);
 });
